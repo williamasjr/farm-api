@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="/home/williamasjr/trybe/java/projects/java-026-java-projeto-final-agrix-fase-c/src/main/java/com/betrybe/agrix/ebytr/staff/security/SecurityFilter.java">
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/AgrixApplication.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/repositories/FarmRepository.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/repositories/FertilizerRepository.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/repositories/CropRepository.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/repositories/PersonRepository.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/entities/Fertilizer.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/entities/Person.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/entities/Crop.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/models/entities/Farm.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/service/TokenService.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/service/FertilizerService.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/service/CropService.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/service/FarmService.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/service/PersonService.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/security/SecurityConfig.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/security/SecurityFilter.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/security/Role.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/exceptions/PersonNotFoundException.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/exceptions/CustomException.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/AuthController.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/FarmController.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/dto/CropDto.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/dto/FertilizreDto.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/dto/AuthDto.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/dto/PersonDto.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/dto/FarmDto.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/response/LoginResponseDtop.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/response/PersonResponse.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/FertilizerController.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/PersonController.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/controllers/CropController.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/java/com/betrybe/agrix/ebytr/staff/advice/HandlerErrosAdvice.java">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/main/resources/application.properties">
+</file>
+<file name="/home/williamasjr/Desktop/my-repo-git/farm-api/src/test/resources/application-test.properties">
 </file>
 </checkstyle>
