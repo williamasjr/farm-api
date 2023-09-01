@@ -4,7 +4,7 @@
 
 <h3>
 
-Esse projeto foi feito durante meus estudos na trybe, no qual é desenvolvido uma API rest em java
+Nesse projeto é desenvolvido uma API rest em java
 ultilizando o ecossistema spring, spring data Jpa para persistência no banco de dados
 (banco de dados ultilizado MySql) e spring security com jwt para autentificação e autorização.
 
