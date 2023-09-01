@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CropService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">agrix</a> &gt; <a href="index.source.html" class="el_package">com.betrybe.agrix.ebytr.staff.service</a> &gt; <span class="el_source">CropService.java</span></div><h1>CropService.java</h1><pre class="source lang-java linenums">package com.betrybe.agrix.ebytr.staff.service;
+
+import com.betrybe.agrix.ebytr.staff.controllers.dto.CropDto;
+import com.betrybe.agrix.ebytr.staff.exceptions.CustomException;
+import com.betrybe.agrix.ebytr.staff.models.entities.Crop;
+import com.betrybe.agrix.ebytr.staff.models.repositories.CropRepository;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * comment.
+ */
+
+@Service
+public class CropService {
+
+  CropRepository cropRepository;
+
+  @Autowired
+<span class="fc" id="L23">  public CropService(CropRepository cropRepository) {</span>
+<span class="fc" id="L24">    this.cropRepository = cropRepository;</span>
+<span class="fc" id="L25">  }</span>
+
+  /**
+   * comment.
+   */
+
+  public Crop insertCrop(Crop crop) {
+<span class="nc" id="L32">    return cropRepository.save(crop);</span>
+  }
+
+  public List&lt;Crop&gt; getAllCrops() {
+<span class="fc" id="L36">    return cropRepository.findAll();</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  public Optional&lt;CropDto&gt; getCropById(Long id) throws CustomException {
+<span class="nc" id="L44">    return Optional.ofNullable(cropRepository</span>
+<span class="nc" id="L45">        .findById(id)</span>
+<span class="nc" id="L46">        .map(crop -&gt; new CropDto(</span>
+<span class="nc" id="L47">            crop.getId(),</span>
+<span class="nc" id="L48">            crop.getName(),</span>
+<span class="nc" id="L49">            crop.getPlantedArea(),</span>
+<span class="nc" id="L50">            crop.getPlantedDate(),</span>
+<span class="nc" id="L51">            crop.getHarvestDate(),</span>
+<span class="nc" id="L52">            crop.getFarm().getId()))</span>
+<span class="nc" id="L53">        .orElseThrow(() -&gt; new CustomException(&quot;Plantação não encontrada!&quot;)));</span>
+  }
+
+  public List&lt;Crop&gt; findByHarvestDate(LocalDate start, LocalDate end) {
+<span class="nc" id="L57">    return cropRepository.findByHarvestDateBetween(start, end);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

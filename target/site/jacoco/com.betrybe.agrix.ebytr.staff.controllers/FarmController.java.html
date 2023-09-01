@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FarmController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">agrix</a> &gt; <a href="index.source.html" class="el_package">com.betrybe.agrix.ebytr.staff.controllers</a> &gt; <span class="el_source">FarmController.java</span></div><h1>FarmController.java</h1><pre class="source lang-java linenums">package com.betrybe.agrix.ebytr.staff.controllers;
+
+import com.betrybe.agrix.ebytr.staff.controllers.dto.CropDto;
+import com.betrybe.agrix.ebytr.staff.controllers.dto.FarmDto;
+import com.betrybe.agrix.ebytr.staff.models.entities.Crop;
+import com.betrybe.agrix.ebytr.staff.models.entities.Farm;
+import com.betrybe.agrix.ebytr.staff.service.CropService;
+import com.betrybe.agrix.ebytr.staff.service.FarmService;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * comment.
+ */
+
+@RestController
+@RequestMapping(value = &quot;/farms&quot;)
+public class FarmController {
+
+  private final FarmService farmService;
+
+  private final CropService cropService;
+
+  @Autowired
+<span class="fc" id="L38">  public FarmController(FarmService farmService, CropService cropService) {</span>
+<span class="fc" id="L39">    this.farmService = farmService;</span>
+<span class="fc" id="L40">    this.cropService = cropService;</span>
+<span class="fc" id="L41">  }</span>
+
+  /**
+   * comment.
+   */
+
+  @PostMapping
+  public ResponseEntity&lt;Farm&gt; createFarm(@RequestBody FarmDto farmDto) {
+<span class="nc" id="L49">    Farm newFarm = farmService.insertFarm(farmDto.toFarm());</span>
+<span class="nc" id="L50">    return ResponseEntity.status(HttpStatus.CREATED).body(newFarm);</span>
+  }
+
+  /**
+   * Endpoint for create a new crop.
+   */
+
+  @PostMapping(&quot;/{farmId}/crops&quot;)
+  public ResponseEntity&lt;CropDto&gt; createCrop(
+      @PathVariable Long farmId,
+      @RequestBody CropDto cropDto
+  ) {
+
+<span class="nc" id="L63">    Optional&lt;Farm&gt; farm = farmService.getFarmById(farmId);</span>
+
+<span class="nc" id="L65">    Crop crop = cropDto.toEntity();</span>
+<span class="nc" id="L66">    crop.setFarms(farm.get());</span>
+<span class="nc" id="L67">    crop.setPlantedDate(cropDto.toEntity().getPlantedDate());</span>
+<span class="nc" id="L68">    crop.setHarvestDate(cropDto.toEntity().getHarvestDate());</span>
+
+<span class="nc" id="L70">    Crop newCrop = cropService.insertCrop(crop);</span>
+<span class="nc" id="L71">    CropDto newCropDto = CropDto.fromEntity(newCrop);</span>
+
+<span class="nc" id="L73">    return ResponseEntity.status(HttpStatus.CREATED).body(newCropDto);</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  @GetMapping()
+  public List&lt;FarmDto&gt; getAllFarms() {
+<span class="fc" id="L82">    List&lt;Farm&gt; getAll = farmService.getAllFarms();</span>
+<span class="fc" id="L83">    return getAll.stream()</span>
+<span class="pc" id="L84">        .map((farm -&gt; new FarmDto(</span>
+<span class="nc" id="L85">            farm.getId(),</span>
+<span class="nc" id="L86">            farm.getName(),</span>
+<span class="nc" id="L87">            farm.getSize())))</span>
+<span class="fc" id="L88">        .collect(</span>
+<span class="fc" id="L89">            Collectors.toList());</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  @GetMapping(&quot;/{farmId}/crops&quot;)
+  public ResponseEntity&lt;?&gt; getAllCropsByFarmId(@PathVariable Long farmId) {
+<span class="nc" id="L98">    Optional&lt;Farm&gt; farm = farmService.getFarmById(farmId);</span>
+<span class="nc" id="L99">    List&lt;CropDto&gt; crops = farm.get().getCrops().stream()</span>
+<span class="nc" id="L100">        .map(crop -&gt; new CropDto(crop.getId(),</span>
+<span class="nc" id="L101">            crop.getName(), crop.getPlantedArea(),</span>
+<span class="nc" id="L102">            crop.getPlantedDate(), crop.getHarvestDate(), crop.getFarm().getId()))</span>
+<span class="nc" id="L103">        .collect(Collectors.toList());</span>
+<span class="nc" id="L104">    return ResponseEntity.ok(crops);</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  @GetMapping(&quot;/{id}&quot;)
+  public ResponseEntity&lt;Optional&lt;Farm&gt;&gt; getFarmById(@PathVariable Long id) {
+<span class="nc" id="L113">    Optional&lt;Farm&gt; optionalFarm = farmService.getFarmById(id);</span>
+<span class="nc" id="L114">    return ResponseEntity.status(HttpStatus.OK).body(optionalFarm);</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

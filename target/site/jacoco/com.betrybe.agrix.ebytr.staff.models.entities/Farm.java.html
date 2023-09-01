@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Farm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">agrix</a> &gt; <a href="index.source.html" class="el_package">com.betrybe.agrix.ebytr.staff.models.entities</a> &gt; <span class="el_source">Farm.java</span></div><h1>Farm.java</h1><pre class="source lang-java linenums">package com.betrybe.agrix.ebytr.staff.models.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.util.List;
+
+/**
+ * comment.
+ */
+
+@Entity
+@Table(name = &quot;farms&quot;)
+public class Farm {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  private String name;
+
+  private Double size;
+
+  @OneToMany(mappedBy = &quot;farm&quot;)
+  @JsonIgnore
+  private List&lt;Crop&gt; crops;
+
+<span class="fc" id="L32">  public Farm() {</span>
+<span class="fc" id="L33">  }</span>
+
+  /**
+   * comment.
+   */
+
+<span class="nc" id="L39">  public Farm(Long id, String name, Double size, List&lt;Crop&gt; crops) {</span>
+<span class="nc" id="L40">    this.id = id;</span>
+<span class="nc" id="L41">    this.name = name;</span>
+<span class="nc" id="L42">    this.size = size;</span>
+<span class="nc" id="L43">    this.crops = crops;</span>
+<span class="nc" id="L44">  }</span>
+
+  public Long getId() {
+<span class="nc" id="L47">    return id;</span>
+  }
+
+  public void setId(Long id) {
+<span class="nc" id="L51">    this.id = id;</span>
+<span class="nc" id="L52">  }</span>
+
+  public String getName() {
+<span class="nc" id="L55">    return name;</span>
+  }
+
+  public void setName(String name) {
+<span class="nc" id="L59">    this.name = name;</span>
+<span class="nc" id="L60">  }</span>
+
+  public Double getSize() {
+<span class="nc" id="L63">    return size;</span>
+  }
+
+  public void setSize(Double size) {
+<span class="nc" id="L67">    this.size = size;</span>
+<span class="nc" id="L68">  }</span>
+
+  public List&lt;Crop&gt; getCrops() {
+<span class="nc" id="L71">    return crops;</span>
+  }
+
+  public void setCrops(List&lt;Crop&gt; crops) {
+<span class="nc" id="L75">    this.crops = crops;</span>
+<span class="nc" id="L76">  }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

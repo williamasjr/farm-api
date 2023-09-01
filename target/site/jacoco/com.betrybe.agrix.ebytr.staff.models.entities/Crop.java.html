@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Crop.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">agrix</a> &gt; <a href="index.source.html" class="el_package">com.betrybe.agrix.ebytr.staff.models.entities</a> &gt; <span class="el_source">Crop.java</span></div><h1>Crop.java</h1><pre class="source lang-java linenums">package com.betrybe.agrix.ebytr.staff.models.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.List;
+
+/**
+ * comment.
+ */
+
+@Entity
+@Table(name = &quot;crops&quot;)
+public class Crop {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Long id;
+
+  @ManyToOne
+  @JoinColumn(name = &quot;farm_id&quot;)
+  private Farm farm;
+
+  private String name;
+
+  @Column(name = &quot;planted_area&quot;)
+  private Double plantedArea;
+
+  @Column(name = &quot;planted_date&quot;)
+  private LocalDate plantedDate;
+
+  @Column(name = &quot;harvest_date&quot;)
+  private LocalDate harvestDate;
+
+  @ManyToMany
+  @JoinTable(
+      name = &quot;crop_fertilizer&quot;,
+      joinColumns = @JoinColumn(name = &quot;crop_id&quot;),
+      inverseJoinColumns = @JoinColumn(name = &quot;fertilizer_id&quot;)
+  )
+  private List&lt;Fertilizer&gt; fertilizers;
+
+<span class="fc" id="L51">  public Crop() {</span>
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * comment.
+   */
+
+<span class="nc" id="L58">  public Crop(Long id, Farm farm, String name, Double plantedArea) {</span>
+<span class="nc" id="L59">    this.id = id;</span>
+<span class="nc" id="L60">    this.farm = farm;</span>
+<span class="nc" id="L61">    this.name = name;</span>
+<span class="nc" id="L62">    this.plantedArea = plantedArea;</span>
+<span class="nc" id="L63">  }</span>
+
+  public Long getId() {
+<span class="nc" id="L66">    return id;</span>
+  }
+
+  public void setId(Long id) {
+<span class="nc" id="L70">    this.id = id;</span>
+<span class="nc" id="L71">  }</span>
+
+  public String getName() {
+<span class="nc" id="L74">    return name;</span>
+  }
+
+  public void setName(String name) {
+<span class="nc" id="L78">    this.name = name;</span>
+<span class="nc" id="L79">  }</span>
+
+  public Double getPlantedArea() {
+<span class="nc" id="L82">    return plantedArea;</span>
+  }
+
+  public void setPlantedArea(Double plantedArea) {
+<span class="nc" id="L86">    this.plantedArea = plantedArea;</span>
+<span class="nc" id="L87">  }</span>
+
+  public Farm getFarm() {
+<span class="nc" id="L90">    return farm;</span>
+  }
+
+  public void setFarms(Farm farm) {
+<span class="nc" id="L94">    this.farm = farm;</span>
+<span class="nc" id="L95">  }</span>
+
+  public LocalDate getPlantedDate() {
+<span class="nc" id="L98">    return plantedDate;</span>
+  }
+
+  public void setPlantedDate(LocalDate plantedDate) {
+<span class="nc" id="L102">    this.plantedDate = plantedDate;</span>
+<span class="nc" id="L103">  }</span>
+
+  public LocalDate getHarvestDate() {
+<span class="nc" id="L106">    return harvestDate;</span>
+  }
+
+  public void setHarvestDate(LocalDate harvestDate) {
+<span class="nc" id="L110">    this.harvestDate = harvestDate;</span>
+<span class="nc" id="L111">  }</span>
+
+  public List&lt;Fertilizer&gt; getFertilizers() {
+<span class="nc" id="L114">    return fertilizers;</span>
+  }
+
+  public void setFertilizers(
+      List&lt;Fertilizer&gt; fertilizers) {
+<span class="nc" id="L119">    this.fertilizers = fertilizers;</span>
+<span class="nc" id="L120">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

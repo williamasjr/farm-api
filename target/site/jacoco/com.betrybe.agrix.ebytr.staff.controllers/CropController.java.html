@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CropController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">agrix</a> &gt; <a href="index.source.html" class="el_package">com.betrybe.agrix.ebytr.staff.controllers</a> &gt; <span class="el_source">CropController.java</span></div><h1>CropController.java</h1><pre class="source lang-java linenums">package com.betrybe.agrix.ebytr.staff.controllers;
+
+import com.betrybe.agrix.ebytr.staff.controllers.dto.CropDto;
+import com.betrybe.agrix.ebytr.staff.models.entities.Crop;
+import com.betrybe.agrix.ebytr.staff.service.CropService;
+import com.betrybe.agrix.ebytr.staff.service.FarmService;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * comment.
+ */
+
+@RestController
+@RequestMapping(&quot;/crops&quot;)
+public class CropController {
+
+  CropService cropService;
+
+  FarmService farmService;
+
+
+  @Autowired
+<span class="fc" id="L36">  public CropController(CropService cropService, FarmService farmService) {</span>
+<span class="fc" id="L37">    this.cropService = cropService;</span>
+<span class="fc" id="L38">    this.farmService = farmService;</span>
+<span class="fc" id="L39">  }</span>
+
+  /**
+   * comment.
+   */
+
+  @GetMapping()
+  public ResponseEntity&lt;Stream&lt;CropDto&gt;&gt; getAllCrops() {
+<span class="fc" id="L47">    List&lt;Crop&gt; getAll = cropService.getAllCrops();</span>
+<span class="fc" id="L48">    Stream&lt;CropDto&gt; getAllCropsDto = getAll.stream()</span>
+<span class="pc" id="L49">        .map((crop -&gt; new CropDto(</span>
+<span class="nc" id="L50">            crop.getId(),</span>
+<span class="nc" id="L51">            crop.getName(),</span>
+<span class="nc" id="L52">            crop.getPlantedArea(),</span>
+<span class="nc" id="L53">            crop.getPlantedDate(),</span>
+<span class="nc" id="L54">            crop.getHarvestDate(),</span>
+<span class="nc" id="L55">            crop.getFarm().getId())));</span>
+
+<span class="fc" id="L57">    return ResponseEntity.ok(getAllCropsDto);</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  @GetMapping(&quot;/{id}&quot;)
+  public ResponseEntity&lt;Optional&lt;CropDto&gt;&gt; getCropbyId(@PathVariable Long id) {
+<span class="nc" id="L66">    Optional&lt;CropDto&gt; optionalCrop = cropService.getCropById(id);</span>
+<span class="nc" id="L67">    return ResponseEntity.status(HttpStatus.OK).body(optionalCrop);</span>
+  }
+
+  /**
+   * comment.
+   */
+
+  @GetMapping(&quot;/search&quot;)
+  public ResponseEntity&lt;List&lt;CropDto&gt;&gt; search(@RequestParam LocalDate start,
+      @RequestParam LocalDate end) {
+<span class="nc" id="L77">    List&lt;Crop&gt; serachCrops = cropService.findByHarvestDate(start, end);</span>
+<span class="nc" id="L78">    List&lt;CropDto&gt; serachCropsDto = serachCrops.stream().map(CropDto::fromEntity)</span>
+<span class="nc" id="L79">        .collect(Collectors.toList());</span>
+<span class="nc" id="L80">    return ResponseEntity.status(HttpStatus.OK).body(serachCropsDto);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
